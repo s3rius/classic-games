@@ -1,0 +1,6 @@
+[target.x86_64-unknown-linux-gnu]
+pre-build = [
+  "apt-get update && apt-get install --assume-yes g++ pkg-config libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0",
+  "strings /usr/lib/libc.so.6 | grep GLIB && exit 1"
+]
+
