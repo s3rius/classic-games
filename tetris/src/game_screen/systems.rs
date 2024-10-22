@@ -4,7 +4,6 @@ use bevy::{
     prelude::*,
     utils::{HashMap, HashSet},
 };
-use rand::Rng;
 
 use crate::{
     consts,
@@ -17,23 +16,23 @@ use super::{
         FigureType, GridCell, GridPosition, OnGameScreen, PlayableTile, Rotation, ScoreLabel,
     },
     events,
-    resources::{GameBoard, GameQueue, SoftDrop},
+    resources::{GameBoard, SoftDrop, TetroBag},
     timers::{self, LockdownTimer},
 };
 
 pub fn reset_game(
     mut score: ResMut<Score>,
     mut board: ResMut<GameBoard>,
-    mut game_queue: ResMut<GameQueue>,
+    mut bag: ResMut<TetroBag>,
 ) {
     score.score = 0;
     score.lines_cleared = 0;
     board.reset();
-    game_queue.reset();
+    bag.reset();
 }
 
-pub fn spawn_figure(mut commands: Commands) {
-    let fig = rand::thread_rng().gen::<FigureType>();
+pub fn spawn_figure(mut commands: Commands, mut bag: ResMut<TetroBag>) {
+    let fig = bag.draw_next();
     let fig_dots = fig.to_dots();
     for (x, y) in fig_dots {
         commands.spawn((
@@ -224,7 +223,7 @@ pub fn lockdown_tiles(
     mut board: ResMut<GameBoard>,
     mut tiles: Query<(&mut FigureType, &mut Rotation, &mut GridPosition), With<PlayableTile>>,
     mut state: ResMut<NextState<GameState>>,
-    mut game_queue: ResMut<GameQueue>,
+    mut bag: ResMut<TetroBag>,
 ) {
     if timer.tick(time.delta()).just_finished() {
         let can_move_down = tiles
@@ -234,7 +233,7 @@ pub fn lockdown_tiles(
             return;
         }
         // Here we should lock the tiles in place.
-        let next_figure = game_queue.next_fig();
+        let next_figure = bag.draw_next();
         let new_dots = next_figure.to_dots();
         for (i, (mut fig_type, mut rotation, mut grid_pos)) in tiles.iter_mut().enumerate() {
             board.occupy((grid_pos.x, grid_pos.y));

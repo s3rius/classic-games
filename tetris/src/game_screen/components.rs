@@ -1,7 +1,5 @@
 use bevy::prelude::*;
 
-use crate::utils::dotarray::DotArray;
-
 #[derive(Debug, Copy, Clone, Component)]
 pub struct OnGameScreen;
 
@@ -44,6 +42,22 @@ impl rand::distributions::Distribution<FigureType> for rand::distributions::Stan
 }
 
 impl FigureType {
+    /// Get all possible figure types.
+    /// Used to implement random generation of
+    /// the next figure.
+    ///
+    /// Checkout TetroBag.
+    pub const fn all() -> &'static [FigureType] {
+        &[
+            FigureType::O,
+            FigureType::I,
+            FigureType::S,
+            FigureType::Z,
+            FigureType::L,
+            FigureType::J,
+            FigureType::T,
+        ]
+    }
     /// This function returns the dots that represent the figure in its spawned state.
     /// This function should be used only when spawning figures.
     ///
@@ -156,9 +170,6 @@ pub struct GridPosition {
     pub x: i32,
     pub y: i32,
 }
-
-#[derive(Debug, Clone, Component, DerefMut, Deref)]
-pub struct GameFigure(pub DotArray<bool>);
 
 #[derive(Debug, Clone, Component)]
 pub struct PlayableTile;

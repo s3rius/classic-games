@@ -23,7 +23,7 @@ impl Plugin for GameScreenPlugin {
                 systems::spawn_figure,
             ),
         )
-        .init_resource::<resources::GameQueue>()
+        .init_resource::<resources::TetroBag>()
         .insert_resource(resources::GameBoard::new())
         .insert_resource(timers::GravityTimer(Timer::new(
             Duration::from_secs_f64(0.4),

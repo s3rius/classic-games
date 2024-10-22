@@ -1,5 +1,7 @@
+use std::collections::VecDeque;
+
 use bevy::prelude::*;
-use rand::Rng;
+use rand::seq::SliceRandom;
 
 use super::components::FigureType;
 
@@ -9,33 +11,12 @@ pub struct SoftDrop {
     pub active: bool,
 }
 
-#[derive(Debug, Clone, Resource)]
-pub struct GameQueue {
-    pub queue: [FigureType; 3],
-}
-
 #[derive(Debug, Clone, Resource, Deref, DerefMut)]
 pub struct GameBoard(pub Vec<Vec<bool>>);
 
-impl Default for GameQueue {
-    fn default() -> Self {
-        let mut random = rand::thread_rng();
-        Self {
-            queue: [random.gen(), random.gen(), random.gen()],
-        }
-    }
-}
-
-impl GameQueue {
-    /// Pop next figure, shifting others.
-    pub fn next_fig(&mut self) -> FigureType {
-        let res = self.queue[0];
-        self.queue = [self.queue[1], self.queue[2], rand::thread_rng().gen()];
-        res
-    }
-    pub fn reset(&mut self) {
-        self.queue = Self::default().queue;
-    }
+#[derive(Debug, Default, Clone, Resource)]
+pub struct TetroBag {
+    bag: VecDeque<FigureType>,
 }
 
 impl GameBoard {
@@ -107,5 +88,23 @@ impl GameBoard {
             }
         }
         cleared
+    }
+}
+
+impl TetroBag {
+    /// Get next figure from the bag.
+    pub fn draw_next(&mut self) -> FigureType {
+        if self.bag.len() <= 3 {
+            let mut new_figs = FigureType::all().to_vec();
+            new_figs.shuffle(&mut rand::thread_rng());
+            for fig in new_figs {
+                self.bag.push_back(fig);
+            }
+        }
+        self.bag.pop_front().expect("This should not have happened")
+    }
+
+    pub fn reset(&mut self) {
+        self.bag.clear();
     }
 }
