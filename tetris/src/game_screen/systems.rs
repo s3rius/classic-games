@@ -9,7 +9,7 @@ use rand::Rng;
 use crate::{
     consts,
     state::{GameState, Score},
-    utils::rotations::rotate_right,
+    utils::rotations::{rotate_left, rotate_right},
 };
 
 use super::{
@@ -192,16 +192,16 @@ pub fn handle_inputs(
     mut rot_events: EventWriter<events::RotateTetronomio>,
     mut hard_drop_events: EventWriter<events::HardDrop>,
 ) {
-    if key.just_pressed(KeyCode::ArrowLeft) {
+    if key.just_pressed(KeyCode::ArrowLeft) || key.just_pressed(KeyCode::KeyH) {
         horizontall_moves.send(events::MoveTetronomioHorizontally { right: false });
     }
-    if key.just_pressed(KeyCode::ArrowRight) {
+    if key.just_pressed(KeyCode::ArrowRight) || key.just_pressed(KeyCode::KeyL) {
         horizontall_moves.send(events::MoveTetronomioHorizontally { right: true });
     }
     if key.just_pressed(KeyCode::Space) {
         hard_drop_events.send(events::HardDrop);
     }
-    if key.just_pressed(KeyCode::ArrowUp) {
+    if key.just_pressed(KeyCode::ArrowUp) || key.just_pressed(KeyCode::KeyK) {
         let shift_pressed = key.pressed(KeyCode::ShiftLeft) || key.pressed(KeyCode::ShiftRight);
         rot_events.send(events::RotateTetronomio {
             // If shift is pressed, we rotate counter-clockwise.
@@ -209,7 +209,7 @@ pub fn handle_inputs(
         });
     }
 
-    if key.pressed(KeyCode::ArrowDown) {
+    if key.pressed(KeyCode::ArrowDown) || key.pressed(KeyCode::KeyJ) {
         if !soft_drop.active {
             soft_drop.active = true;
         }
@@ -294,8 +294,11 @@ pub fn rotate_tetronomio(
             for (tile, _, _) in playable_tiles.iter() {
                 // Here we subtract the offset of the bounding box and the center point
                 // to get the relative position of the tile to the center point.
-                let (new_x, new_y) =
-                    rotate_right(tile.x - x_offset - center_x, tile.y - y_offset - center_y);
+                let (new_x, new_y) = if event.clockwise {
+                    rotate_right(tile.x - x_offset - center_x, tile.y - y_offset - center_y)
+                } else {
+                    rotate_left(tile.x - x_offset - center_x, tile.y - y_offset - center_y)
+                };
                 // Here we add the offset of the bounding box and the center point back
                 // to get the absolute position of the tile.
                 // And also we add the test offset to the tile position to perform
