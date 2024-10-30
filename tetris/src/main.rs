@@ -1,7 +1,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use bevy::{prelude::*, window::WindowResolution};
 
-pub mod assets;
 pub mod consts;
 pub mod game_screen;
 pub mod gameover_screen;
@@ -26,7 +25,7 @@ fn main() {
         .insert_resource(state::Score::default())
         .insert_resource(state::Debug::default())
         .init_state::<state::GameState>()
-        .add_plugins(assets::TetrisAssetsPlugin)
+        .add_plugins(cgc_lib::CGCCommonAssetsPlugin)
         .add_plugins(start_menu::StartMenu)
         .add_plugins(game_screen::GameScreenPlugin)
         .add_plugins(gameover_screen::GameoverScreenPlugin)

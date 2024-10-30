@@ -1,7 +1,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 use bevy::{prelude::*, window::WindowResolution};
 
-mod assets;
 mod consts;
 mod death_screen;
 mod game_screen;
@@ -23,7 +22,7 @@ fn main() {
         .insert_resource(state::Score(0))
         .add_systems(Startup, setup_camera)
         .add_systems(Update, exit_game)
-        .add_plugins(assets::GameAssetsPlugin)
+        .add_plugins(cgc_lib::CGCCommonAssetsPlugin)
         .add_plugins(start_screen::StartScreenPlugin)
         .add_plugins(game_screen::GameScreenPlugin)
         .add_plugins(death_screen::DeathScreenPlugin)

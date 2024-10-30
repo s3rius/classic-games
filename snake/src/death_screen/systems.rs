@@ -11,7 +11,7 @@ use super::components::{ButtonAction, OnDeathScreen};
 pub fn render_screen(mut commands: Commands, asset_server: Res<AssetServer>, score: Res<Score>) {
     let text_style = TextStyle {
         font_size: 16.,
-        font: asset_server.load(consts::FONT_RES),
+        font: asset_server.load(cgc_lib::COMMON_FONT_NAME),
         color: consts::FOREGROUND_COL,
         ..default()
     };

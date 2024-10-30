@@ -1,5 +1,5 @@
 [package]
-name = "snake"
+name = "cgc_lib"
 edition = "2021"
 version.workspace = true
 authors.workspace = true
@@ -7,8 +7,3 @@ description.workspace = true
 
 [dependencies]
 bevy.workspace = true
-rand.workspace = true
-cgc_lib.workspace = true
-
-[build-dependencies]
-embed-resource.workspace = true

@@ -11,6 +11,8 @@ use super::{
     states::DifficultySelectState,
 };
 
+use cgc_lib::COMMON_FONT_NAME;
+
 pub fn init_substate(mut substate: ResMut<NextState<DifficultySelectState>>) {
     substate.set(DifficultySelectState::SelectingSize);
 }
@@ -18,7 +20,7 @@ pub fn init_substate(mut substate: ResMut<NextState<DifficultySelectState>>) {
 pub fn setup_size_select(mut commands: Commands, asset_server: Res<AssetServer>) {
     let text_style = TextStyle {
         font_size: 16.,
-        font: asset_server.load(consts::FONT_RESOURCE),
+        font: asset_server.load(COMMON_FONT_NAME),
         color: consts::FOREGROUND_COLOR,
         ..default()
     };
@@ -87,7 +89,7 @@ pub fn setup_size_select(mut commands: Commands, asset_server: Res<AssetServer>)
 pub fn setup_wrap_select(mut commands: Commands, asset_server: Res<AssetServer>) {
     let text_style = TextStyle {
         font_size: 16.,
-        font: asset_server.load(consts::FONT_RESOURCE),
+        font: asset_server.load(COMMON_FONT_NAME),
         color: consts::FOREGROUND_COLOR,
         ..default()
     };

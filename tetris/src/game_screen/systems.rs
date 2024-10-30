@@ -110,7 +110,7 @@ pub fn setup_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                             text: Text::from_section(
                                 "",
                                 TextStyle {
-                                    font: asset_server.load(consts::FONT_RESOURCE),
+                                    font: asset_server.load(cgc_lib::COMMON_FONT_NAME),
                                     color: consts::FOREGROUND_COLOR,
                                     ..default()
                                 },
@@ -162,7 +162,7 @@ pub fn update_score_label(
         ),
         TextStyle {
             font_size: 16.,
-            font: asset_server.load(consts::FONT_RESOURCE),
+            font: asset_server.load(cgc_lib::COMMON_FONT_NAME),
             color: consts::FOREGROUND_COLOR,
             ..default()
         },

@@ -7,6 +7,7 @@ use crate::{
 };
 
 use super::components::{ButtonAction, OnGameOverScreen};
+use cgc_lib::COMMON_FONT_NAME;
 
 pub fn render_screen(
     mut commands: Commands,
@@ -16,7 +17,7 @@ pub fn render_screen(
 ) {
     let text_style = TextStyle {
         font_size: 16.,
-        font: asset_server.load(consts::FONT_RESOURCE),
+        font: asset_server.load(COMMON_FONT_NAME),
         color: consts::FOREGROUND_COLOR,
         ..default()
     };
