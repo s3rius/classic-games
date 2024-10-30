@@ -1,40 +1,13 @@
 [package]
 name = "pipes"
-version = "0.1.0"
 edition = "2021"
+version.workspace = true
+authors.workspace = true
+description.workspace = true
 
 [dependencies]
-bevy = "0.14.2"
-rand = "0.8.5"
-
-# Enable a small amount of optimization in the dev profile.
-[profile.dev]
-opt-level = 1
-
-# Enable a large amount of optimization in the dev profile for dependencies.
-[profile.dev.package."*"]
-opt-level = 3
-
-[profile.release]
-# Compile the entire crate as one unit.
-# Slows compile times, marginal improvements.
-codegen-units = 1
-# Do a second optimization pass over the entire program, including dependencies.
-# Slows compile times, marginal improvements.
-lto = true
-opt-level = "z"  # Optimize for size.
-strip = true
-panic = "abort"
-
-# Optimize for size in the wasm-release profile to reduce load times and bandwidth usage on web.
-[profile.wasm-release]
-# Default to release profile values.
-inherits = "release"
-# Optimize with size in mind (also try "z", sometimes it is better).
-# Slightly slows compile times, great improvements to file size and runtime performance.
-opt-level = "s"
-# Strip all debugging information from the binary to slightly reduce file size.
-strip = "debuginfo"
+bevy.workspace = true
+rand.workspace = true
 
 [build-dependencies]
-embed-resource = "2.5.0"
+embed-resource.workspace = true

@@ -10,7 +10,7 @@ pub const FOCUSED_PIPE_COLOR: Color = Color::srgb(1., 0.95, 0.607);
 pub const CONNECTED_PIPE_COLOR: Color = Color::srgb(0., 0.7, 0.);
 pub const CYCLE_PIPES_COLOR: Color = Color::srgb(1., 0., 0.);
 
-pub const FONT_RESOURCE: &str = "embedded://pipes/fonts/atari-classic.ttf";
+pub const FONT_RESOURCE: &str = "embedded://pipes/../../common_assets/fonts/atari-classic.ttf";
 
 pub const PIPE_CROSS_TEXTURE: &str = "embedded://pipes/images/cross.png";
 pub const PIPE_DEAD_END_TEXTURE: &str = "embedded://pipes/images/dead_end.png";

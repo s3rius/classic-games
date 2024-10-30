@@ -1,27 +1,19 @@
-[package]
-name = "snaker"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-rand = "0.8.5"
-
-[dependencies.bevy]
-version = "0.14.2"
-default-features = false
-features = [
-  "bevy_sprite",
-  "bevy_ui",
-  "bevy_text",
-  "bevy_winit",
-  "multi_threaded",
-  "x11",
-  "bevy_color",
-  "bevy_asset",
-  "bevy_state",
+[workspace]
+resolver = "2"
+members = [
+  "pipes",
+  "tetris",
+  "snake"
 ]
 
-[build-dependencies]
+[workspace.package]
+version = "0.0.1"
+authors = ["s3rius <s3riussan@gmail.com>"]
+description = "Classic games collection"
+
+[workspace.dependencies]
+bevy = "0.14.2"
+rand = "0.8.5"
 embed-resource = "2.5.0"
 
 # Enable a small amount of optimization in the dev profile.

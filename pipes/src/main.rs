@@ -9,6 +9,7 @@ pub mod game_screen;
 pub mod globals;
 pub mod start_menu;
 pub mod utils;
+
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(WindowPlugin {
