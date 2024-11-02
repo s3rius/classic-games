@@ -26,6 +26,7 @@ impl Plugin for StartMenu {
                         event: ButtonAction::StartGame,
                         text_style: default_text_style.clone(),
                     },
+                    #[cfg(not(target_arch = "wasm32"))]
                     SimpleMenuButton {
                         text: "EXIT".to_string(),
                         event: ButtonAction::StartGame,

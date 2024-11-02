@@ -11,11 +11,18 @@ pub mod utils;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(WindowPlugin {
+            #[cfg(not(target_arch = "wasm32"))]
             primary_window: Some(Window {
                 title: String::from("Testris"),
                 mode: bevy::window::WindowMode::Windowed,
                 resolution: WindowResolution::new(1280., 720.),
                 position: WindowPosition::Centered(MonitorSelection::Primary),
+                ..default()
+            }),
+            #[cfg(target_arch = "wasm32")]
+            primary_window: Some(Window {
+                canvas: Some(String::from("#gameboard")),
+                fit_canvas_to_parent: true,
                 ..default()
             }),
             ..default()

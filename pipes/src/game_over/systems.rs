@@ -113,6 +113,7 @@ pub fn render_screen(
                                 ..default()
                             });
                         });
+                    #[cfg(not(target_arch = "wasm32"))]
                     parent
                         .spawn((
                             ButtonBundle {

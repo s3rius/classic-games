@@ -69,6 +69,7 @@ pub fn render_screen(mut commands: Commands, asset_server: Res<AssetServer>) {
                                 ..default()
                             });
                         });
+                    #[cfg(not(target_arch = "wasm32"))]
                     parent
                         .spawn((
                             ButtonBundle {
