@@ -1,10 +1,8 @@
 [workspace]
 resolver = "2"
 members = [
-  "pipes",
-  "tetris",
-  "snake",
-  "cgc_lib"
+  "games/*",
+  "cgc_lib",
 ]
 
 [workspace.package]
@@ -45,4 +43,4 @@ inherits = "release"
 # Slightly slows compile times, great improvements to file size and runtime performance.
 opt-level = "s"
 # Strip all debugging information from the binary to slightly reduce file size.
-strip = "debuginfo"
+strip = true

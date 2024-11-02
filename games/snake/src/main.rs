@@ -15,7 +15,7 @@ fn main() {
             primary_window: Some(Window {
                 title: String::from("Snake"),
                 mode: bevy::window::WindowMode::Windowed,
-                resolution: WindowResolution::new(800., 800.),
+                resolution: WindowResolution::new(800., 800.).with_scale_factor_override(1.),
                 position: WindowPosition::Centered(MonitorSelection::Primary),
                 ..default()
             }),
