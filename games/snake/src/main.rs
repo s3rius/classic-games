@@ -22,6 +22,7 @@ fn main() {
             #[cfg(target_arch = "wasm32")]
             primary_window: Some(Window {
                 canvas: Some(String::from("#gameboard")),
+                resolution: WindowResolution::new(800., 800.).with_scale_factor_override(1.),
                 fit_canvas_to_parent: true,
                 ..default()
             }),

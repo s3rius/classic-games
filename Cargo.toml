@@ -2,7 +2,8 @@
 resolver = "2"
 members = [
   "games/*",
-  "cgc_lib",
+  "cgc_lib", 
+  "cgc_web", 
 ]
 
 [workspace.package]
