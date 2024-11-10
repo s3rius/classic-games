@@ -1,9 +1,10 @@
-use bevy::{asset::embedded_asset, prelude::*};
+use bevy::prelude::*;
+use cgc_lib::CGCCommonAssetsPlugin;
 
 pub struct AssetsPlugin;
 
 impl Plugin for AssetsPlugin {
     fn build(&self, app: &mut App) {
-        embedded_asset!(app, "fonts/atari-classic.ttf");
+        app.add_plugins(CGCCommonAssetsPlugin);
     }
 }

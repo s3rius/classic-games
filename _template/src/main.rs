@@ -8,11 +8,18 @@ pub mod globals;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(WindowPlugin {
+            #[cfg(not(target_arch = "wasm32"))]
             primary_window: Some(Window {
                 title: env!("CARGO_PKG_NAME").to_string(),
                 mode: bevy::window::WindowMode::Windowed,
                 resolution: WindowResolution::new(1280., 720.),
                 position: WindowPosition::Centered(MonitorSelection::Primary),
+                ..default()
+            }),
+            #[cfg(target_arch = "wasm32")]
+            primary_window: Some(Window {
+                canvas: Some(String::from("#gameboard")),
+                fit_canvas_to_parent: true,
                 ..default()
             }),
             ..default()
@@ -37,6 +44,7 @@ fn setup_camera(mut commands: Commands) {
 
 #[allow(unused)]
 fn global_controls(keys: Res<ButtonInput<KeyCode>>, mut exit_writer: EventWriter<AppExit>) {
+    #[cfg(not(target_arch = "wasm32"))]
     if keys.just_pressed(KeyCode::KeyQ) {
         exit_writer.send(AppExit::Success);
     }

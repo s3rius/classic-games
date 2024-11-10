@@ -8,6 +8,7 @@ description.workspace = true
 [dependencies]
 bevy.workspace = true
 rand.workspace = true
+cgc_lib.workspace = true
 
 [build-dependencies]
 embed-resource.workspace = true
